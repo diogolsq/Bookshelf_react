@@ -1,6 +1,8 @@
 #TODO formatar README Após
 Comentários sobre o desenvolvimento da aplicação.
 
+Estou usando um ruby 2.4.4 já que eu trabalho com esse e para eu não ficar mudando de versões entre meus projetos optei por fazer direto nele. Sinta-se livre para usar versões mais recentes; 
+
 Setei Rspec e se sobrar tempo escreverei alguns testes.
 
 A aplicação de Rails + React, terá o react já implementado no Rails, invés de trabalhar como API e dois sistemas independentes.
@@ -10,3 +12,8 @@ Já que o react está integrado ele pode demorar pra compilar, caso queira fazer
 
 
 Vou colocar a lógica de fazer o request para fakerapi na Seed, para popular meu BD.
+
+Rodar rails db:seed para popular seu BD localmente.
+
+
+S
