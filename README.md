@@ -1,24 +1,12 @@
-# README
+#TODO formatar README Após
+Comentários sobre o desenvolvimento da aplicação.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Setei Rspec e se sobrar tempo escreverei alguns testes.
 
-Things you may want to cover:
+A aplicação de Rails + React, terá o react já implementado no Rails, invés de trabalhar como API e dois sistemas independentes.
+Já que o react está integrado ele pode demorar pra compilar, caso queira fazer mudanças no código, nesse caso rode o seguinte comando em outra janela de terminal:
 
-* Ruby version
+./bin/webpack-dev-server
 
-* System dependencies
+nesse caso você terá live code reloading.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
