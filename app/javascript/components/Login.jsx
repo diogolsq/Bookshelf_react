@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../../assets/stylesheets/Login.scss';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLock, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default class Login extends React.Component {
     state = {
@@ -19,7 +20,7 @@ export default class Login extends React.Component {
             <div className="container">
             <div className="form-box">
             <div className="header-form">
-                <h4 className="text-primary text-center"><i className="fa fa-user-circle" style={{fontSize:"110px"}}></i></h4>
+                <h4 className="text-primary text-center"><FontAwesomeIcon icon={faUserCircle} style={{fontSize:"110px"}} /></h4>
                 <div className="image">
                 </div>
             </div>
@@ -27,13 +28,13 @@ export default class Login extends React.Component {
                 <form>
                 <div className="input-group mb-3">
         <div className="input-group-prepend">
-        <span className="input-group-text"><i class="fa fa-user"></i></span>
+        <span className="input-group-text"><FontAwesomeIcon icon={faUser} style={{fontSize:"25px"}}/></span>
     </div>
     <input type="text" className="form-control" placeholder="Username" />
     </div>
     <div className="input-group mb-3">
         <div className="input-group-prepend">
-        <span className="input-group-text"><i class="fa fa-lock"></i></span>
+        <span className="input-group-text"><FontAwesomeIcon icon={faLock} style={{fontSize:"25px"}} /></span>
     </div>
     <input type="text" className="form-control" placeholder="Password" />
     </div>
