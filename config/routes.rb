@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      get 'users/create'
-      get 'users/show'
-    end
-  end
+  
   devise_for :users
+  
+  post 'users/sign_up' => 'users#create'
+  get 'users/show'
   root 'homepage#index' 
   get '/*path' => 'homepage#index'
 end
