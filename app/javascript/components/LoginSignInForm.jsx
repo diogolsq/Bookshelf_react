@@ -1,12 +1,28 @@
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import '../../assets/stylesheets/Login2.scss';
+import '../../assets/stylesheets/LoginSignInForm.scss';
 import React, {useState} from "react";
+
+
 
 
 const Form = ({ option }) => {
 	const [teste] = React.useState(1)
+	console.log(option)
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log('vem nenem')
+		
+		if(option == 1) {
+
+		}else if (option == 2) {
+
+		}else if (option ==3) {
+		 alert("TODO implementar refresh de senha e enviar email")
+		}
+	}
+
 	return (
-		<form className='account-form' onSubmit={(evt) => evt.preventDefault()}>
+		<form className='account-form' onSubmit={(event, opt) => handleSubmit(event)}>
 			<div className={'account-form-fields ' + (option === 1 ? 'sign-in' : (option === 2 ? 'sign-up' : 'forgot')) }>
 				<input id='email' name='email' type='email' placeholder='E-mail' required />
 				<input id='password' name='password' type='password' placeholder='Senha' required={option === 1 || option === 2 ? true : false} disabled={option === 3 ? true : false} />
@@ -28,6 +44,7 @@ const Form = ({ option }) => {
 
 const LoginSignInForm = () => {
 	const [option, setOption] = React.useState(1)
+
 
 	return (
 		<div className='centralizando'>
