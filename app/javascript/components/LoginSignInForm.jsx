@@ -1,31 +1,28 @@
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import '../../assets/stylesheets/LoginSignInForm.scss';
 import React, {useState} from "react";
+import { withRouter } from 'react-router';
 import axios from "axios";
-
-
+import { useHistory } from "react-router-dom";
 
 const Form = ({ option }) => {
 	const [email, setEmail] = React.useState('')
 	const [password, setPassword] = React.useState('')
 	const [password_confirmation, setPasswordConfirmation] = React.useState('')
 
-	function handleChange(event){
-		const {name, value} = event.target
-		setState({
-			...state,
-			[name]: value
-		})
-	}
 	const token = document.querySelector('meta[name="csrf-token"]').content;
 	const headers = {
 		'Content-Type': 'application/json',
    		'X-CSRF-Token': token
 	  }
 
+	function redirect() {
+		window.location.href="/kanban"
+	} 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		
+
 		if(option == 1 || option == 2) {
 			axios
 			.post(
@@ -42,8 +39,9 @@ const Form = ({ option }) => {
 			)
 			.then(response => {
 			  if (response.data.status === 200 && response.data.current_user.length > 0) {
-				console.log('ui mamae')
-
+				console.log('ui mamae agora vai !!')
+				console.log(response.data.current_user)
+				redirect()
 			  }else if (response.data.status === 200 && response.data.current_user.length == 0) {
 				alert("Usuário ou senha errada")
 			  }else if (response.data.status === 500) {
@@ -75,11 +73,6 @@ const Form = ({ option }) => {
 }
 
 
-// const Form = () => {
-// 	return (
-// 		<div>teste</div>
-// 	)
-// }
 
 const LoginSignInForm = () => {
 	const [option, setOption] = React.useState(1)

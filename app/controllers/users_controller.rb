@@ -11,7 +11,8 @@ class UsersController < ApplicationController
             if params["user"]["option"] == 1
                 #byebug
                 find_my_user = User.where(email: params["user"]["email"], encrypted_password: params["user"]["password"])
-                current_user = find_my_user
+                current_user = find_my_user.first if find_my_user
+                
 
                 
             elsif params["user"]["option"] == 2 
@@ -25,6 +26,8 @@ class UsersController < ApplicationController
 
                 #byebug
                 current_user["avatar"] = pegando_img_src
+
+                current_user.save!
             end
             
             #byebug
@@ -32,12 +35,11 @@ class UsersController < ApplicationController
         rescue
            status = 500
         end
+        #byebug
         @current_user = current_user
-        render json: {status: status, current_user: current_user}
+        render json: {status: status, current_user: [current_user.email, current_user.avatar]}
     end
     
 
-    def show
-    end
           
 end
