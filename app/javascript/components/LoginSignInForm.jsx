@@ -6,10 +6,17 @@ import axios from "axios";
 
 
 const Form = ({ option }) => {
-	const [email, setEmail] = React.useState()
-	const [password, setPassword] = React.useState()
-	const [password_confirmation, setPasswordConfirmation] = React.useState()
+	const [email, setEmail] = React.useState('')
+	const [password, setPassword] = React.useState('')
+	const [password_confirmation, setPasswordConfirmation] = React.useState('')
 
+	function handleChange(event){
+		const {name, value} = event.target
+		setState({
+			...state,
+			[name]: value
+		})
+	}
 	const token = document.querySelector('meta[name="csrf-token"]').content;
 	const headers = {
 		'Content-Type': 'application/json',
@@ -19,9 +26,7 @@ const Form = ({ option }) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		
-		if(option == 1) {
-
-		}else if (option == 2) {
+		if(option == 1 || option == 2) {
 			axios
 			.post(
 			  "http://localhost:3000/users/sign_up",
@@ -29,14 +34,20 @@ const Form = ({ option }) => {
 				user: {
 				  email: email,
 				  password: password,
-				  password_confirmation: password_confirmation
+				  password_confirmation: password_confirmation,
+				  option: option
 				}
 			  },
 			  {headers: headers}
 			)
 			.then(response => {
-			  if (response.data.status === "created") {
-				this.props.handleSuccessfulAuth(response.data);
+			  if (response.data.status === 200 && response.data.current_user.length > 0) {
+				console.log('ui mamae')
+
+			  }else if (response.data.status === 200 && response.data.current_user.length == 0) {
+				alert("Usuário ou senha errada")
+			  }else if (response.data.status === 500) {
+				alert("Usuário já cadastrado, caso não lembre sua senha, clickar na opção de resgatar a senha")
 			  }
 			})
 			.catch(error => {
@@ -52,9 +63,9 @@ const Form = ({ option }) => {
 	return (
 		<form className='account-form' onSubmit={(event, opt) => handleSubmit(event )}>
 			<div className={'account-form-fields ' + (option === 1 ? 'sign-in' : (option === 2 ? 'sign-up' : 'forgot')) }>
-				<input id='email' name='email' type='email' placeholder='E-mail' value={email} required />
-				<input id='password' name='password' type='password' placeholder='Senha'value={password} required={option === 1 || option === 2 ? true : false} disabled={option === 3 ? true : false} />
-				<input id='repeat-password' name='repeat-password' type='password' value={password_confirmation} placeholder='Repita a Senha' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false} />
+				<input id='email' name='email' type='email' placeholder='E-mail' value={email} onChange={e => setEmail(e.target.value)} required />
+				<input id='password' name='password' type='password' placeholder='Senha'value={password} onChange={e => setPassword(e.target.value)} required={option === 1 || option === 2 ? true : false} disabled={option === 3 ? true : false} />
+				<input id='repeat-password' name='repeat-password' type='password' value={password_confirmation} onChange={e => setPasswordConfirmation(e.target.value)} placeholder='Repita a Senha' required={option === 2 ? true : false} disabled={option === 1 || option === 3 ? true : false} />
 			</div>
 			<button className='btn-submit-form' type='submit'>
 				{ option === 1 ? 'Sign in' : (option === 2 ? 'Sign up' : 'Reset password') }
