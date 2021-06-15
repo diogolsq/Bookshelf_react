@@ -3,33 +3,8 @@ import Board from 'react-trello';
 import axios from "axios";
 import LoginHelper from "../helpers/LoginHelper";
 
-const data = {
-    lanes: [
-      {
-        id: 'lane1',
-        title: 'Shelf',
-        label: '',
-        cards: [
-          {id: 'Card1', title: 'Boa Leitura', description: 'Can AI make memes', label: '30 mins', draggable: false},
-          {id: 'Card2', title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins', metadata: {sha: 'be312a1'}},
-          {id: 'Card3', title: 'Teste', description: 'Transfer via NEFT', label: '5 mins', metadata: {sha: 'be312a1'}}
 
-        ]
-      },
-      {
-        id: 'lane2',
-        title: 'Lendo',
-        label: '0/0',
-        cards: []
-      },
-      {
-        id: 'lane3',
-        title: 'Lido',
-        label: '0/0',
-        cards: []
-      },
-    ]
-  }
+
 
 
 export default class KanbanBoard extends React.Component {
@@ -48,7 +23,6 @@ export default class KanbanBoard extends React.Component {
       }
 
     const user = LoginHelper.getId()
-    console.log({user})
     axios
 			.get(
 			  `http://localhost:3000/shelfs/books/${user}`,
@@ -56,7 +30,15 @@ export default class KanbanBoard extends React.Component {
 			)
 			.then(response => {
 			  if (response.data.status === 200) {
-				console.log('ui mamae agora vai !!')
+        // objeto do banco já tá vindo com muitos campos vou filtrar só o que eu quero e no formato que eu já faço a amarração com o react-trelo de forma mais rápida.
+        this.setState({
+          cardLane1: response.data.book_list_estante.map(({ title, id, author, description }) => ({ label: author, id: id, title: title, description: description })), 
+          cardLane2: response.data.book_list_lendo.map(({ title, id, author, description  }) => ({ label: author, id: id, title: title, description: description })), 
+          cardLane2: response.data.book_list_lido.map(({ title, id, author,  description  }) => ({ label: author, id: id, title: title, description: description }))}, 
+          () => {console.log(this.state.cardLane1)})
+
+
+
 			  } else if (response.data.status === 500) {
 				alert("aconteceu um erro na hora de carregar os livros, tente novamente em alguns instantes")
 			  }
@@ -66,13 +48,87 @@ export default class KanbanBoard extends React.Component {
 			});
   };
 
+  
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.getBooks();
+
   };
   
+ 
+
+  listenerMudança = (event) => {
+    
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const headers = {
+      'Content-Type': 'application/json',
+         'X-CSRF-Token': token
+      }
+
+    const user = LoginHelper.getId()
+
+    // nao vou atualizar nos states, já vou mandar para o back salvar no banco a nova lógica
+    console.log(event)
+      if (event["lanes"] && event["lanes"][0] && event["lanes"][1] && event["lanes"][2]){
+        const newCardLane1 = event["lanes"][0].cards 
+        const newCardLane2 = event["lanes"][1].cards 
+        const newCardLane3 = event["lanes"][2].cards
+      
+        if (!!newCardLane1.length || !!newCardLane2.length || !!newCardLane3.length){
+          console.log('beep')
+          axios
+          .post(
+            "http://localhost:3000/shelfs/books/save",
+            {
+            shelves: {
+              estante: newCardLane1,
+              lendo: newCardLane2,
+              lido: newCardLane3,
+            },
+            user: {
+              user: user
+            }
+            },
+            {headers: headers}
+          )
+          .then(response => {
+            if (response.data.status === 200) {
+            console.log('ui mamae agora vai !!')
+            }
+          })
+
+        }
+      }
+  }
+  
+
   render() {
+    const data = {
+      lanes: [
+        {
+          id: 'lane1',
+          title: 'Shelf',
+          label: `${this.state.cardLane1.length}`,
+          cards: this.state.cardLane1 
+            // {id: 'Card1', title: 'Boa Leitura', description: 'Can AI make memes', label: '30 mins', draggable: false},
+        },
+        {
+          id: 'lane2',
+          title: 'Lendo' ,
+          label: `${this.state.cardLane2.length}`,
+          cards: this.state.cardLane2
+        },
+        {
+          id: 'lane3',
+          title: 'Lido',
+          label: `${this.state.cardLane3.length}`,
+          cards: this.state.cardLane3
+        },
+      ]
+    }
+
+
     return (
-    <Board data={data} />)
+    <Board data={data} onDataChange={this.listenerMudança} />)
   }
 }
