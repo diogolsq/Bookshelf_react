@@ -16,7 +16,8 @@ Vou colocar a lógica de fazer o request para fakerapi na Seed, para popular meu
 Rodar rails db:seed para popular seu BD localmente.
 
 
-A princípio não vou persistir o Usuário. o ideal seria escrever alguns helpers para salvar no cookies ou usar redux para persistir no front e usar o devise para manipular no back. Afim de ganhar tempo não vou fazer isso nesse teste.
+Deixei alguns testes no Rspec
 
 
-Deixei algun testes no Rspec
+
+Coloquei a lógica de salvar mudanças no kanban em um callback do proprio kanban que dispara um request pro rails para salvar no banco, isso faz que o salvamento seja um flow instântaneo. Já vi muitos trellos boards que salvam a cada minuto, essa é uma outra opção de fazer criar, um setInterval a cada 2 minutos e salva o que tá no kanban.
