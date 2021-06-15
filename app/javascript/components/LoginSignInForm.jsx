@@ -1,9 +1,7 @@
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import '../../assets/stylesheets/LoginSignInForm.scss';
 import React, {useState} from "react";
-import { withRouter } from 'react-router';
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import LoginHelper from "../helpers/LoginHelper";
 
 const Form = ({ option }) => {
 	const [email, setEmail] = React.useState('')
@@ -41,6 +39,7 @@ const Form = ({ option }) => {
 			  if (response.data.status === 200 && response.data.current_user.length > 0) {
 				console.log('ui mamae agora vai !!')
 				console.log(response.data.current_user)
+				LoginHelper.login(response.data.current_user)
 				redirect()
 			  }else if (response.data.status === 200 && response.data.current_user.length == 0) {
 				alert("Usuário ou senha errada")

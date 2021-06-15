@@ -1,7 +1,7 @@
-import React from 'react'
-import Board from 'react-trello'
+import React from 'react';
+import Board from 'react-trello';
 import axios from "axios";
-
+import LoginHelper from "../helpers/LoginHelper";
 
 const data = {
     lanes: [
@@ -47,10 +47,11 @@ export default class KanbanBoard extends React.Component {
          'X-CSRF-Token': token
       }
 
-      
+    const user = LoginHelper.getId()
+    console.log({user})
     axios
 			.get(
-			  "http://localhost:3000/shelfs/books",
+			  `http://localhost:3000/shelfs/books/${user}`,
 			  {headers: headers}
 			)
 			.then(response => {

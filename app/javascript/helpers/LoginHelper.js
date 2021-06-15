@@ -1,36 +1,43 @@
-import { Cookies } from "react-cookie";
+import Cookies from 'universal-cookie';
+
+
+
+const cookie = new Cookies();
 
 class LoginHelper {
+  
   islogged = () => {
     const user_name = this.getEmail();
-
+    
     if (!!user_name) {
-      cookie.save("userName", user_name, { path: "/" });
+      cookie.set("userName", user_name, { path: "/" });
       return true;
     } else {
       return false;
     }
   };
-
+  
   login = user => {
+    // const cookie = new Cookies();
+
     console.log(user)
-    cookie.save("userId", user["id"], { path: "/" }); //cookie.save ('userName' ,user.name, { path: '/' });
-    cookie.save("userEmail", user["name"], { path: "/" }); //cookie.save ('userName' ,user.name, { path: '/' });
-    cookie.save("userThumb", user["login"], { path: "/" });
+    cookie.set("userId", user[0], { path: "/" }); //cookie.save ('userName' ,user.name, { path: '/' });
+    cookie.set("userEmail", user[1], { path: "/" }); //cookie.save ('userName' ,user.name, { path: '/' });
+    cookie.set("userThumb", user[2], { path: "/" });
     console.log("acesso autorizado");
     console.log(this.getEmail() + " está logado");
   };
 
   getThumb = () => {
-    return cookie.load("Thumb");
+    return cookie.get("userThumb");
   };
 
   getEmail = () => {
-    return cookie.load("Email");
+    return cookie.get("userEmail");
   };
 
   getId = () => {
-    return cookie.load("Id");
+    return cookie.get("userId");
   };
 
 //   logoff = () => {
