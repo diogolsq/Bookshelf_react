@@ -29,7 +29,7 @@ books.each do |book|
     #Além da validação de title único, eu vou passar um first_or_create para evitar que tenha valores repetidos no meu banco.
     new_book =  Book.where(
         title: book["title"], author: book["author"], genre: book["genre"], 
-        description: book["description"], image: book["image"], published: book["published"], 
+        description: book["description"][0..99], image: book["image"], published: book["published"], 
         publisher: book["publisher"]).first_or_create
 
 
