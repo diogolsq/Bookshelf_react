@@ -9,35 +9,32 @@ class UsersController < ApplicationController
             # TODO PASSAR ISSO PRO DEVISE TOMAR CONTA.
             
             if params["user"]["option"] == 1
-                #byebug
                 find_my_user = User.where(email: params["user"]["email"], encrypted_password: params["user"]["password"])
                 current_user = find_my_user.first if find_my_user
                 
 
                 
             elsif params["user"]["option"] == 2 
-                #byebug
                 new_user = User.new(email: params["user"]["email"], encrypted_password: params["user"]["password"])
-                new_user.save!
                 current_user = new_user
                 
                 #Adicionando o Thumbnail
                 pegando_img_src = GetThumbService.get(current_user["email"])
 
-                #byebug
                 current_user["avatar"] = pegando_img_src
 
-                current_user.save!
+                current_user.save
+
+                PopulandoShelfParaUser.set(current_user)
             end
             
-            #byebug
 
         rescue
            status = 500
         end
-        #byebug
-        @current_user = current_user
-        render json: {status: status, current_user: [current_user.email, current_user.avatar]}
+    
+        render json: {status: status, current_user: [current_user.id, current_user.email, current_user.avatar]} if current_user
+        render json: {status: status, current_user: []} unless current_user
     end
     
 

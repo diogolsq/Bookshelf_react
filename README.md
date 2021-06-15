@@ -17,3 +17,6 @@ Rodar rails db:seed para popular seu BD localmente.
 
 
 A princípio não vou persistir o Usuário. o ideal seria escrever alguns helpers para salvar no cookies ou usar redux para persistir no front e usar o devise para manipular no back. Afim de ganhar tempo não vou fazer isso nesse teste.
+
+
+Deixei algun testes no Rspec
