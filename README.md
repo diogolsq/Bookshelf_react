@@ -23,6 +23,12 @@ Coloquei a lógica de salvar mudanças no kanban em um callback do proprio kanba
 
 
 TODO: 
-#1 Fazer um própria Navbar com logout e login por ela.
-#2 Setar o rails-react-devise e passar toda a lógica do user para dentro do devise.
-#3 Realizar testes de EndPoints
+#1 Trabalhar o Layout do Sistema
+
+#2 Passar as lógicas do shelves_controller para serviços para não deixar os controles inchados.
+
+#3 Fazer um própria Navbar com logout e login por ela.
+
+#4 Setar o rails-react-devise e passar toda a lógica do user para dentro do devise, garantir proteção de senhas.
+
+#5 Realizar testes de EndPoints
