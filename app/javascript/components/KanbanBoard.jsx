@@ -34,8 +34,8 @@ export default class KanbanBoard extends React.Component {
         this.setState({
           cardLane1: response.data.book_list_estante.map(({ title, id, author, description }) => ({ label: author, id: id, title: title, description: description })), 
           cardLane2: response.data.book_list_lendo.map(({ title, id, author, description  }) => ({ label: author, id: id, title: title, description: description })), 
-          cardLane2: response.data.book_list_lido.map(({ title, id, author,  description  }) => ({ label: author, id: id, title: title, description: description }))}, 
-          () => {console.log(this.state.cardLane1)})
+          cardLane3: response.data.book_list_lido.map(({ title, id, author,  description  }) => ({ label: author, id: id, title: title, description: description }))}, 
+          () => {console.log(this.state.cardLane3)})
 
 
 
@@ -73,9 +73,9 @@ export default class KanbanBoard extends React.Component {
         const newCardLane1 = event["lanes"][0].cards 
         const newCardLane2 = event["lanes"][1].cards 
         const newCardLane3 = event["lanes"][2].cards
-      
+        
+        console.log(newCardLane3)
         if (!!newCardLane1.length || !!newCardLane2.length || !!newCardLane3.length){
-          console.log('beep')
           axios
           .post(
             "http://localhost:3000/shelfs/books/save",

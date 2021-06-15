@@ -38,19 +38,19 @@ class ShelvesController < ApplicationController
         user_id = params[:user][:user].to_i
 
         livros_estante.each do |livro_id|
-            shelf = Shelf.where(book_id: livro_id, user_id: user_id)
-            byebug
-            shelf.update_attributes(status: 'estante')
+            shelf = Shelf.where(book_id: livro_id, user_id: user_id).first
+            shelf.update_attributes(status: 'estante') if shelf
         end
 
         livros_lendo.each do |livro_id|
-            shelf = Shelf.where(book_id: livro_id, user_id: user_id)
-            shelf.update_attributes(status: 'lendo')
+            shelf = Shelf.where(book_id: livro_id, user_id: user_id).first
+            shelf.update_attributes(status: 'lendo') if shelf
         end
 
         livros_lido.each do |livro_id|
-            shelf = Shelf.where(book_id: livro_id, user_id: user_id)
-            shelf.update_attributes(status: 'lido')
+            #byebug
+            shelf = Shelf.where(book_id: livro_id, user_id: user_id).first
+            shelf.update_attributes(status: 'lido') if shelf
         end
 
     end
