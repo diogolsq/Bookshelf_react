@@ -2,8 +2,8 @@ import React from 'react';
 import Board from 'react-trello';
 import axios from "axios";
 import LoginHelper from "../helpers/LoginHelper";
-
-
+import '../../assets/stylesheets/KanbanBoard.scss'
+import Navbar from '../components/Navbar';
 
 
 
@@ -108,20 +108,20 @@ export default class KanbanBoard extends React.Component {
         {
           id: 'lane1',
           title: 'Shelf',
-          label: `${this.state.cardLane1.length}`,
+          // label: `${this.state.cardLane1.length}`,
           cards: this.state.cardLane1 
             // {id: 'Card1', title: 'Boa Leitura', description: 'Can AI make memes', label: '30 mins', draggable: false},
         },
         {
           id: 'lane2',
           title: 'Lendo' ,
-          label: `${this.state.cardLane2.length}`,
+          // label: `${this.state.cardLane2.length}`,
           cards: this.state.cardLane2
         },
         {
           id: 'lane3',
           title: 'Lido',
-          label: `${this.state.cardLane3.length}`,
+          // label: `${this.state.cardLane3.length}`,
           cards: this.state.cardLane3
         },
       ]
@@ -129,6 +129,10 @@ export default class KanbanBoard extends React.Component {
 
 
     return (
-    <Board data={data} onDataChange={this.listenerMudança} />)
+      <div className='Centralizing-Kanban'>
+        <Navbar />
+        <Board data={data} onDataChange={this.listenerMudança} />
+      </div>
+    )
   }
 }

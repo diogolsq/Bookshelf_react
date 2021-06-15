@@ -1,0 +1,12 @@
+.navbar {
+    position:fixed;
+    top:-8px;
+    width:100vw;
+    z-index:100;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.image-navbar > img {
+    height:66px;
+}
