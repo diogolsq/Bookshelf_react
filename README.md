@@ -4,7 +4,7 @@ Comentários sobre o desenvolvimento da aplicação.
 Estou usando um ruby 2.4.4 já que eu trabalho com esse e para eu não ficar mudando de versões entre meus projetos optei por fazer direto nele. Sinta-se livre para usar versões mais recentes; 
 
 
-A aplicação de Rails + React, terá o react já implementado no Rails, invés de trabalhar como API e dois sistemas independentes.
+A aplicação de Rails + React, terá o react já implementado no Rails, invés de trabalhar como API e dois sistemas independentes, afim de ganhar tempo de desevolvimento.
 Já que o react está integrado ele pode demorar pra compilar, caso queira fazer mudanças no código, nesse caso rode o seguinte comando em outra janela de terminal para ter live code reloading:
 
 ./bin/webpack-dev-server
