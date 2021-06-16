@@ -25,7 +25,7 @@ Coloquei a lógica de salvar mudanças no kanban em um callback do proprio kanba
 TODO restante: 
 - [ ] #1 Trabalhar o Layout do Sistema
 
-- [X] #2 Passar as lógicas do shelves_controller para serviços para não deixar os controles inchados.~~
+- [X] #2 Passar as lógicas do shelves_controller para serviços para não deixar os controles inchados.
 
 - [ ] #3 Fazer um própria Navbar com logout e login por ela.
 
