@@ -27,7 +27,7 @@ TODO restante:
 
 - [X] #2 Passar as lógicas do shelves_controller para serviços para não deixar os controles inchados.
 
-- [ ] #3 Fazer um própria Navbar com logout e login por ela.
+- [ ] #3 Fazer um própria Navbar com logout e login por ela, invés de deixar o cookie sobescrever toda vez que alguem refaz o login.
 
 - [ ] #4 Setar o rails-react-devise e passar toda a lógica do user para dentro do devise, garantir proteção de senhas.
 
