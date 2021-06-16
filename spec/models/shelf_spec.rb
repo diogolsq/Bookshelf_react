@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Shelf, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "shelf é inválido quando não contém status" do
+    shelf = Shelf.new(book_id: 1, user_id: 1)
+    expect(shelf).to be_invalid
+  end
 end
