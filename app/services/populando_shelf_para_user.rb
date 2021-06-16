@@ -11,7 +11,8 @@ module PopulandoShelfParaUser
                 shelf = Shelf.new(status: "estante", user_id: user.id, book_id: book_id)
                 shelf.save
             end
-
+            
+            #byebug
         end
     end
 end
